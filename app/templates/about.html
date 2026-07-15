@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Days to Banana Death</title>
+    <meta name="description" content="Learn about the Days to Banana Death project — a deep learning banana ripeness predictor built with custom dataset, ResNet transfer learning, and regression evaluation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-emoji">🍌</span>
+                <span class="logo-text">Days to Banana Death</span>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Predict</a>
+                <a href="/about" class="nav-link active">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main about-main">
+        <section class="about-hero">
+            <h1 class="about-title">About This Project</h1>
+            <p class="about-subtitle">
+                A computer vision regression model that predicts banana ripeness from images.
+            </p>
+        </section>
+
+        <div class="about-grid">
+            <!-- Architecture Card -->
+            <div class="about-card glass-card">
+                <div class="about-card-icon">🧠</div>
+                <h2>Architecture</h2>
+                <p>
+                    Fine-tuned ResNet-18 pretrained on ImageNet, adapted for regression.
+                    The model outputs a single continuous value: <strong>days remaining until overripe</strong>.
+                </p>
+                <div class="about-flow">
+                    <span class="flow-step">Input Image (224×224)</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">ResNet-18 Backbone</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">Regression Head</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step highlight">Days Remaining</span>
+                </div>
+            </div>
+
+            <!-- Dataset Card -->
+            <div class="about-card glass-card">
+                <div class="about-card-icon">📸</div>
+                <h2>Custom Dataset</h2>
+                <p>
+                    Bananas were photographed daily from purchase until overripe.
+                    Each banana's actual lifespan was observed — no fixed day assumptions.
+                </p>
+                <ul class="about-list">
+                    <li>Multiple bananas with varying lifespans</li>
+                    <li>Banana-level train/val/test split (no data leakage)</li>
+                    <li>Mild augmentation: flips, rotation, color jitter</li>
+                </ul>
+            </div>
+
+            <!-- Experiments Card -->
+            <div class="about-card glass-card">
+                <div class="about-card-icon">🔬</div>
+                <h2>Experiments</h2>
+                <p>Three model architectures were compared to justify the final choice:</p>
+                <table class="about-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Approach</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Baseline CNN</td>
+                            <td>Simple CNN from scratch</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet Frozen</td>
+                            <td>Feature extraction only</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet Fine-tuned</td>
+                            <td>Last 2 blocks unfrozen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Evaluation Card -->
+            <div class="about-card glass-card">
+                <div class="about-card-icon">📊</div>
+                <h2>Evaluation</h2>
+                <p>Regression metrics on completely unseen bananas:</p>
+                <ul class="about-list">
+                    <li><strong>MAE</strong> — Mean Absolute Error (average days off)</li>
+                    <li><strong>RMSE</strong> — Root Mean Squared Error</li>
+                    <li><strong>R²</strong> — Coefficient of determination</li>
+                </ul>
+                <p class="about-note">
+                    Evaluated on test bananas never seen during training.
+                </p>
+            </div>
+
+            <!-- Tech Stack Card -->
+            <div class="about-card glass-card wide-card">
+                <div class="about-card-icon">⚡</div>
+                <h2>Tech Stack</h2>
+                <div class="tech-badges">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">PyTorch</span>
+                    <span class="tech-badge">torchvision</span>
+                    <span class="tech-badge">ResNet-18</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">Pillow</span>
+                    <span class="tech-badge">pandas</span>
+                    <span class="tech-badge">matplotlib</span>
+                    <span class="tech-badge">scikit-learn</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Built with PyTorch & ResNet · Transfer Learning · Computer Vision</p>
+    </footer>
+
+    <script>
+        // Minimal particle effect for about page
+        (function() {
+            const container = document.getElementById('bgParticles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 20) + 's';
+                container.appendChild(particle);
+            }
+        })();
+    </script>
+</body>
+</html>

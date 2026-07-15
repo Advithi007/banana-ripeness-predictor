@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days to Banana Death — Ripeness Predictor</title>
+    <meta name="description" content="Upload a banana image to predict how many days remain before it becomes overripe. Powered by deep learning with ResNet transfer learning.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-emoji">🍌</span>
+                <span class="logo-text">Days to Banana Death</span>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link active">Predict</a>
+                <a href="/about" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="heroSection">
+            <h1 class="hero-title">
+                How long does your banana have?
+            </h1>
+            <p class="hero-subtitle">
+                Upload a photo of your banana and our deep learning model will predict 
+                how many days remain before it becomes overripe.
+            </p>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section" id="uploadSection">
+            <div class="upload-card glass-card">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon" id="uploadIcon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <p class="upload-text">Drag & drop your banana image here</p>
+                    <p class="upload-subtext">or click to browse</p>
+                    <p class="upload-formats">JPG, PNG, WebP — max 10MB</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <img id="previewImage" class="preview-image" alt="Banana preview">
+                    <button class="btn-remove" id="btnRemove" title="Remove image">✕</button>
+                </div>
+
+                <!-- Predict Button -->
+                <button class="btn-predict" id="btnPredict" style="display: none;">
+                    <span class="btn-text">Predict Ripeness</span>
+                    <span class="btn-loader" id="btnLoader" style="display: none;">
+                        <span class="spinner"></span>
+                        Analyzing...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section class="result-section" id="resultSection" style="display: none;">
+            <div class="result-card glass-card">
+                <!-- Result Header -->
+                <div class="result-header">
+                    <span class="result-emoji" id="resultEmoji">🍌</span>
+                    <h2 class="result-title">Banana Ripeness Analysis</h2>
+                </div>
+
+                <!-- Days Remaining Display -->
+                <div class="days-display" id="daysDisplay">
+                    <span class="days-label">Estimated Remaining Life</span>
+                    <div class="days-value-container">
+                        <span class="days-tilde">~</span>
+                        <span class="days-number" id="daysNumber">0</span>
+                        <span class="days-unit">days</span>
+                    </div>
+                </div>
+
+                <!-- Ripeness Timeline -->
+                <div class="timeline-container" id="timelineContainer">
+                    <div class="timeline-labels">
+                        <span class="timeline-label">
+                            <span class="stage-dot green"></span>Green
+                        </span>
+                        <span class="timeline-label">
+                            <span class="stage-dot yellow"></span>Yellow
+                        </span>
+                        <span class="timeline-label">
+                            <span class="stage-dot spotted"></span>Spotted
+                        </span>
+                        <span class="timeline-label">
+                            <span class="stage-dot overripe"></span>Overripe
+                        </span>
+                    </div>
+                    <div class="timeline-track">
+                        <div class="timeline-fill" id="timelineFill"></div>
+                        <div class="timeline-marker" id="timelineMarker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-label" id="markerLabel">You are here</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Info -->
+                <div class="model-info" id="modelInfo">
+                    <span class="model-badge" id="modelBadge"></span>
+                </div>
+
+                <!-- Try Again Button -->
+                <button class="btn-tryagain" id="btnTryAgain">
+                    Try Another Banana
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with PyTorch & ResNet · Transfer Learning · Computer Vision</p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
